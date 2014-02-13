@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CardKit's Todo Demo</title>
+<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+
+<link href="bower_components/cardkit/dist/css/cardkit-standalone.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="my-app">
+
+<ck-card type="page" id="myDefaultPage">
+    <ck-part type="title">Todo Demo</ck-part>
+    <ck-part type="nav" href="#myNavDrawer"></ck-part>
+    <ck-part type="footer" 
+        source-selector=".myglobal-page-footer"></ck-part>
+
+    <ck-card type="form">
+        <ck-part type="item">
+            <form class="my-todo-form">
+                <input type="text" 
+                    class="my-todo-input"
+                    name="text"
+                    placeholder="What needs to be done?">
+            </form>
+        </ck-part>
+    </ck-card>
+
+    <div class="my-todo-list">
+
+        <ck-card type="list" subtype="split">
+            <ck-part type="hd">All</ck-part>
+            <ck-part type="hdOpt">
+                <div class="ck-select my-todo-tab"
+                        id="myTodoTab"
+                        data-ignore-repeat="true"
+                        data-fluid="true"
+                        data-title="Switch the list">
+                    <button type="button" value="all" 
+                         class="ck-option enabled">All</button>
+                    <button type="button" value="active" 
+                         class="ck-option">Active</button>
+                    <button type="button" value="completed" 
+                         class="ck-option">Completed</button>
+                </div>
+            </ck-part>
+            <ck-part type="ft">
+                <p><span>0</span> items left</p>
+            </ck-part>
+        </ck-card>
+
+    </div>
+
+</ck-card>
+
+<ck-card type="page" id="myDetailPage" blank-text="In the name of the Lean Startup, this feature is coming soon...">
+    <ck-part type="title">Detail</ck-part>
+    <ck-part type="nav">
+        <a href="#myDefaultPage" class="my-top-return ck-link"></a>
+    </ck-part>
+    <ck-part type="footer" 
+        source-selector=".myglobal-page-footer"></ck-part>
+    <ck-part type="actionbar">
+        <button type="button" action-layout="auto"
+            class="ck-modal-button my-todo-note"
+            data-source="modalTodoNote"></button>
+        <button type="button" action-layout="auto">Reload</button>
+        <button type="button" action-layout="auto">Desktop Mode</button>
+    </ck-part>
+
+    <ck-card type="box" paper-style="true">
+        <ck-part type="hd">Notes</ck-part>
+    </ck-card>
+
+    <div class="my-todo-notebox"></div>
+
+</ck-card>
+
+<ck-card type="page" id="myNavDrawer" deck="navdrawer">
+    <div class="my-navdrawer-mask"></div>
+    <div class="my-navdrawer">
+
+        <ck-card type="box" paper-style="true">
+            <ck-part type="hd">About</ck-part>
+        </ck-card>
+
+        <ck-card type="box" plain-style="true">
+            <p>Hi, I'm a Todo demo for CardKit2</p>
+            <ck-part type="ft">
+                <div class="my-version">Version: 0.1.0</div>
+            </ck-part>
+        </ck-card>
+
+        <ck-card type="list" subtype="more" paper-style="true">
+            <ck-part type="hd">Setting</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature A</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature B</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature C</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature D</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature E</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature F</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature G</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature H</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature I</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature J</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature K</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature L</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature M</ck-part>
+            <ck-part type="item" href="#myNavSetting">Feature N</ck-part>
+        </ck-card>
+
+    </div>
+</ck-card>
+
+<ck-card type="page" id="myNavSetting" deck="navdrawer">
+    <div class="my-navdrawer-mask"></div>
+    <div class="my-navdrawer">
+
+        <ck-card type="list"  paper-style="true"
+                blank-text="In the name of the Lean Startup, this feature is coming soon...">
+            <ck-part type="hd">Setting</ck-part>
+        </ck-card>
+
+        <ck-card type="list" subtype="more" paper-style="true">
+            <ck-part type="item" href="#myNavDrawer">Back</ck-part>
+            <ck-part type="item" href="#myDefaultPage">Close</ck-part>
+        </ck-card>
+
+    </div>
+</ck-card>
+
+</div>
+
+<div class="myglobal-page-footer">
+    <div class="copyright">© 2014 douban.com, all rights reserved</div>
+</div>
+
+<script type="text/template" class="modalTodoNote">
+<form>
+    <ck-card type="form">
+        <ck-part type="item">
+            <label>章节名</label>
+            <input type="text" value="" id="myTodoNoteTitle"
+                name="title" placeholder="Title">
+        </ck-part>
+        <ck-part type="item">
+            <label>笔记内容</label>
+            <textarea name="text"  id="myTodoNoteNote"
+                placeholder="Note"></textarea>
+        </ck-part>
+    </div>
+</form>
+</script>
+
+<script type="text/darkscript" class="modalTodoNote">
+var _note_form = $(this);
+require([
+    'jquery', 
+    'mo/template',
+    'cardkit'
+], function($, tpl, cardkit){
+    cardkit.modalCard.event.bind('confirmOnThis', function(modal){
+        var title = _note_form.find('[name="title"]').val();
+        var text = _note_form.find('[name="text"]').val();
+        if (!text) {
+            return cardkit.growl({
+                content: 'Error！',
+                corner: 'bottom'
+            }).open();
+        }
+        $('.my-todo-notebox').prepend(tpl.convertTpl('tplTodoNote', {
+                date: new Date().toString().replace(/GMT.*/, ''),
+                title: title || 'Untitle',
+                text: text
+            })).parent().updateDarkDOM();
+        modal.ok();
+    });
+});
+</script>
+
+<script type="text/template" id="tplTodoItem">
+<ck-part type="item">
+    <ck-part type="titleLink" href="#myDetailPage"></ck-part>
+    <ck-part type="content">
+        <span class="my-todo-text">{%= text %}</span>
+    </ck-part>
+    <ck-part type="meta">{%= date %}</ck-part>
+    <ck-part type="opt">
+        <button type="button" class="ck-switch my-todo-complete" 
+                id="myTodoComplete{%= order %}"
+                value="0"
+                data-enable-val="1"
+                data-label="false">
+            <span class="enable-text">✔</span>
+            <span class="disable-text">x</span>
+            <span class="block"></span>
+        </button>
+    </ck-part>
+</ck-part>
+</script>
+
+<script type="text/template" id="tplTodoNote">
+<ck-card type="box" plain-style="true">
+    <ck-part type="hd">{%= title %}</ck-part>
+    <ck-part type="ft">{%= date %}</ck-part>
+    <ck-part type="content">{%= text %}</ck-part>
+</ck-card>
+</script>
+
+<!--<script src="bower_components/ozjs/oz.js"></script>-->
+<!--<script src="js/oz.config.js"></script>-->
+<script src="bower_components/cardkit/dist/cardkit-standalone.js"></script>
+<script src="bower_components/jquery/jquery.js"></script>
+<script src="js/global.js"></script>
+<script>
+require([
+    'jquery',
+    'mo/template',
+    'darkdom',
+    'cardkit'
+], function($, tpl, darkdom, cardkit){
+
+cardkit.delegate.on('hold', {
+    '.my-todo-list .ck-link-mask': function(){
+        var me = $(this);
+        cardkit.confirm('Are you sure you want to delete this?', function(){
+            var bright_id = me.closest('.ck-item')[0].id;
+            darkdom.getDarkById(bright_id).remove()
+                .updateDarkDOM();
+        });
+    }
+});
+
+$('body').delegate('.my-todo-tab', 'actionView:confirm', function(e){
+    //var me = this;
+    var component = e.originalEvent.component;
+    var current = component.val();
+    if (current != 'all') {
+        component.event.once('close', function(){
+            cardkit.alert('In the name of the Lean Startup, this feature is coming soon...', {
+                title: 'Sorry!'
+            }).event.once('close', function(){
+                //cardkit.picker(me).select('all');
+            });
+        });
+    }
+}).delegate('.my-todo-form', 'submit', function(e){
+    e.preventDefault();
+    var list = $('.my-todo-list > *');
+    var input = $(this).find('.my-todo-input');
+    var html = tpl.convertTpl('tplTodoItem', {
+        order: list.find('.my-todo-text').length + 1,
+        date: new Date().toString().replace(/GMT.*/, ''),
+        text: input.val()
+    });
+    list.prepend(html).updateDarkDOM();
+    input.val('').blur();
+});
+
+});
+</script>
+
+</body>
+</html>
+
