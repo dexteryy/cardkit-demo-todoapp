@@ -27,6 +27,14 @@
   background-image:url('../pics/compose.png');
 }
 
+.my-todo-status {
+  float:left;
+}
+
+.my-todo-tips {
+  float:right;
+}
+
 .my-navdrawer-mask {
   position:absolute;
   top:0;
