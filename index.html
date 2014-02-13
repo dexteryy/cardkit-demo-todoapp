@@ -53,7 +53,8 @@
                 </div>
             </ck-part>
             <ck-part type="ft">
-                <p><span>0</span> items left</p>
+                <p class="my-todo-status"><span class="total">0</span> items left</p>
+                <p class="my-todo-tips">Tips: Long-press to delete item.</p>
             </ck-part>
         </ck-card>
 
@@ -172,8 +173,8 @@ require([
         var text = _note_form.find('[name="text"]').val();
         if (!text) {
             return cardkit.growl({
-                content: 'Error！',
-                corner: 'bottom'
+                corner: 'center',
+                content: 'Invalid format!'
             }).open();
         }
         $('.my-todo-notebox').prepend(tpl.convertTpl('tplTodoNote', {
@@ -232,7 +233,9 @@ cardkit.delegate.on('hold', {
     '.my-todo-list .ck-link-mask': function(){
         var me = $(this);
         cardkit.confirm('Are you sure you want to delete this?', function(){
-            var bright_id = me.closest('.ck-item')[0].id;
+            var bright_id = me.closest('.ck-item')[0].id,
+                total = $('.my-todo-list').eq(0).find('.my-todo-text').length - 1;
+            $('.my-todo-status .total').html(total);
             darkdom.getDarkById(bright_id).remove()
                 .updateDarkDOM();
         });
@@ -254,14 +257,24 @@ $('body').delegate('.my-todo-tab', 'actionView:confirm', function(e){
     }
 }).delegate('.my-todo-form', 'submit', function(e){
     e.preventDefault();
-    var list = $('.my-todo-list > *');
-    var input = $(this).find('.my-todo-input');
-    var html = tpl.convertTpl('tplTodoItem', {
-        order: list.find('.my-todo-text').length + 1,
-        date: new Date().toString().replace(/GMT.*/, ''),
-        text: input.val()
-    });
-    list.prepend(html).updateDarkDOM();
+    var list = $('.my-todo-list > *').eq(0),
+        input = $(this).find('.my-todo-input'),
+        text = input.val(),
+        total = list.find('.my-todo-text').length + 1;
+    if (!/\S/.test(text)) {
+        cardkit.growl({
+            corner: 'center',
+            content: 'Invalid format!'
+        }).open();
+    } else {
+        var html = tpl.convertTpl('tplTodoItem', {
+            order: total,
+            date: new Date().toString().replace(/GMT.*/, ''),
+            text: text
+        });
+        $('.my-todo-status .total').html(total);
+        list.prepend(html).updateDarkDOM();
+    }
     input.val('').blur();
 });
 
