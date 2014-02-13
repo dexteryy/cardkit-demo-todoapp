@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CardKit's Todo Demo</title>
+<title>CardKit Demo: To-do App</title>
 <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 <meta name="format-detection" content="telephone=no">
 
@@ -14,8 +14,12 @@
 <div class="my-app">
 
 <ck-card type="page" id="myDefaultPage">
-    <ck-part type="title">Todo Demo</ck-part>
+    <ck-part type="title">To-do App</ck-part>
     <ck-part type="nav" href="#myNavDrawer"></ck-part>
+    <ck-part type="actionbar">
+        <button type="button" action-layout="overflow">Reload</button>
+        <button type="button" action-layout="overflow">Desktop Mode</button>
+    </ck-part>
     <ck-part type="footer" 
         source-selector=".myglobal-page-footer"></ck-part>
 
@@ -57,7 +61,7 @@
 
 </ck-card>
 
-<ck-card type="page" id="myDetailPage" blank-text="In the name of the Lean Startup, this feature is coming soon...">
+<ck-card type="page" id="myDetailPage" blank-text="In the name of the Lean, this feature is coming soon...">
     <ck-part type="title">Detail</ck-part>
     <ck-part type="nav">
         <a href="#myDefaultPage" class="my-top-return ck-link"></a>
@@ -89,7 +93,7 @@
         </ck-card>
 
         <ck-card type="box" plain-style="true">
-            <p>Hi, I'm a Todo demo for CardKit2</p>
+            <p>Hi, I'm a To-do List demo for CardKit2</p>
             <ck-part type="ft">
                 <div class="my-version">Version: 0.1.0</div>
             </ck-part>
@@ -121,7 +125,7 @@
     <div class="my-navdrawer">
 
         <ck-card type="list"  paper-style="true"
-                blank-text="In the name of the Lean Startup, this feature is coming soon...">
+                blank-text="In the name of the Lean, this feature is coming soon...">
             <ck-part type="hd">Setting</ck-part>
         </ck-card>
 
@@ -241,7 +245,7 @@ $('body').delegate('.my-todo-tab', 'actionView:confirm', function(e){
     var current = component.val();
     if (current != 'all') {
         component.event.once('close', function(){
-            cardkit.alert('In the name of the Lean Startup, this feature is coming soon...', {
+            cardkit.alert('In the name of the Lean, this feature is coming soon...', {
                 title: 'Sorry!'
             }).event.once('close', function(){
                 //cardkit.picker(me).select('all');
