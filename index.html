@@ -219,7 +219,7 @@ require([
 <!--<script src="bower_components/ozjs/oz.js"></script>-->
 <!--<script src="js/oz.config.js"></script>-->
 <script src="bower_components/cardkit/dist/cardkit-standalone.js"></script>
-<script src="bower_components/jquery/jquery.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="js/global.js"></script>
 <script>
 require([
@@ -229,7 +229,7 @@ require([
     'cardkit'
 ], function($, tpl, darkdom, cardkit){
 
-cardkit.delegate.on('hold', {
+cardkit.darkDelegate.on('hold', {
     '.my-todo-list .ck-link-mask': function(){
         var me = $(this);
         cardkit.confirm('Are you sure you want to delete this?', function(){
